@@ -1,0 +1,225 @@
+<head>
+    <link rel="stylesheet" href="../../css/styles-layout.css">
+    <link rel="stylesheet" href="../../css/client/concert/buy-tickets.css">
+</head>
+<main class="container mt-5">
+    <header class="concert-header mb-5">
+        <h1 class="text-center display-4 fw-bold mb-3">
+            <%= concert.name %>
+        </h1>
+
+        <div class="event-meta text-center mb-4">
+            <div class="badge bg-primary mb-2">
+                <i class="bi bi-calendar-event me-2"></i>
+                <%= new Date(concert.event_date).toLocaleDateString('vi-VN', { weekday: 'long' , year: 'numeric' ,
+                    month: 'long' , day: 'numeric' }) %>
+            </div>
+
+            <div class="d-block fs-5">
+                <p class="mb-1">
+                    <i class="bi bi-geo-alt-fill me-2"></i>
+                    <strong>Địa điểm:</strong>
+                    <%= concert.location %>
+                </p>
+                <p>
+                    <i class="bi bi-clock-fill me-2"></i>
+                    <strong>Thời gian:</strong>
+                    <%= concert.start_time %>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <section class="stage-container" aria-label="Khu vực sân khấu">
+        <div class="stage">
+            <div class="spotlight"></div>
+            <span class="stage-text">SÂN KHẤU CHÍNH</span>
+        </div>
+    </section>
+
+    <section class="seating-chart" aria-labelledby="seating-chart-heading">
+        <h2 id="seating-chart-heading" class="visually-hidden">Sơ đồ chỗ ngồi</h2>
+
+        <!-- VIP Section -->
+        <article class="seat-group vip-group">
+            <header class="tier-header mb-3">
+                <h3 class="tier-title">
+                    <span class="badge vip-badge me-2"></span>
+                    Khu VIP - <%= concert.vip_price.toLocaleString('vi-VN') %> VND
+                </h3>
+            </header>
+            <div class="seat-row">
+                <div class="seat-container">
+                    <div class="row">
+                        <% ["A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17"].forEach(seat => { %>
+                          <% const isReserved = reservedSeats.includes(seat); %>
+                          <div class="seat vip <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.vip_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>                                                                
+                </div>
+
+                <div class="seat-container mt-2">
+                    <div class="row">
+                        <% ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "B10", "B11", "B12", "B13", "B14", "B15", "B16", "B17"].forEach(seat => { %>
+                          <% const isReserved = reservedSeats.includes(seat); %>
+                          <div class="seat vip <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.vip_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>                      
+                </div>
+            </div>
+        </article>
+
+        <!-- Normal Section -->
+        <article class="seat-group normal-group">
+            <header class="tier-header mb-3">
+                <h3 class="tier-title">
+                    <span class="badge normal-badge me-2"></span>
+                    Khu Thường - <%= concert.normal_price.toLocaleString('vi-VN') %> VND
+                </h3>
+            </header>
+            <div class="seat-row">
+                <div class="seat-container mt-2">
+                    <div class="row">
+                        <% 
+                          ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17"].forEach(seat => { 
+                            const isReserved = reservedSeats.includes(seat); 
+                        %>
+                          <div class="seat normal <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.normal_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>                                            
+                </div>
+
+                <div class="seat-container mt-2">
+                    <div class="row">
+                        <% 
+                          ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13", "D14", "D15", "D16", "D17"].forEach(seat => { 
+                            const isReserved = reservedSeats.includes(seat); 
+                        %>
+                          <div class="seat normal <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.normal_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>                                            
+                </div>
+
+                <div class="seat-container mt-2">
+                    <div class="row">
+                        <% 
+                          ["E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15", "E16", "E17"].forEach(seat => { 
+                            const isReserved = reservedSeats.includes(seat); 
+                        %>
+                          <div class="seat normal <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.normal_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>
+                </div>
+
+                <div class="seat-container mt-2">
+                    <div class="row">
+                        <% 
+                          ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14", "F15", "F16", "F17"].forEach(seat => { 
+                            const isReserved = reservedSeats.includes(seat); 
+                        %>
+                          <div class="seat normal <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.normal_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>
+                </div>
+                <div class="seat-container mt-2">
+                    <div class="row">
+                        <% 
+                          ["X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "X10", "X11", "X12", "X13", "X14", "X15", "X16", "X17"].forEach(seat => { 
+                            const isReserved = reservedSeats.includes(seat); 
+                        %>
+                          <div class="seat normal <%= isReserved ? 'reserved' : 'available' %>" 
+                               data-price="<%= concert.normal_price %>">
+                            <%= seat %>
+                          </div>
+                        <% }) %>
+                      </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    <!-- Checkout Section -->
+    <section class="checkout-panel sticky-top bg-white shadow-lg p-4">
+        <div class="checkout-header mb-4">
+            <h3 class="checkout-title">
+                <i class="bi bi-cart3 me-2"></i>
+                Vé Của Bạn
+            </h3>
+            <div class="total-price">
+                <span class="total-label">Tổng cộng:</span>
+                <span id="totalPrice" class="total-amount">0 VND</span>
+            </div>
+        </div>
+
+        <div class="selected-seats mb-4">
+            <div id="selectedSeatsList" class="selected-seats-list"></div>
+        </div>
+
+        <button type="button" class="btn-checkout w-100 py-3" disabled aria-label="Tiến hành thanh toán">
+            <span class="btn-text">Thanh Toán - </span>
+            <span class="btn-amount">0 VND</span>
+            <i class="bi bi-arrow-right-circle ms-2"></i>
+        </button>
+    </section>
+</main>
+<script>
+    const seats = document.querySelectorAll(".seat.available");
+    const totalPriceElement = document.getElementById("totalPrice");
+    const selectedSeatsList = document.getElementById("selectedSeatsList");
+    const checkoutButton = document.querySelector(".btn-checkout .btn-amount");
+    const checkoutBtn = document.querySelector(".btn-checkout");
+
+    let totalPrice = 0;
+    let selectedSeats = [];
+    const concertId = '<%- concert.id %>';
+
+    seats.forEach(seat => {
+        seat.addEventListener("click", function () {
+            const price = parseInt(this.getAttribute("data-price"));
+            const seatNumber = this.textContent.trim();
+
+            if (this.classList.contains("selected")) {
+                this.classList.remove("selected");
+                totalPrice -= price;
+                selectedSeats = selectedSeats.filter(s => s !== seatNumber);
+            } else {
+                this.classList.add("selected");
+                totalPrice += price;
+                selectedSeats.push(seatNumber);
+            }
+
+            totalPriceElement.textContent = `${totalPrice.toLocaleString()} VND`;
+            checkoutButton.textContent = `${totalPrice.toLocaleString()} VND`;
+
+            selectedSeatsList.innerHTML = selectedSeats.length > 0
+                ? selectedSeats.map(seat => `<span class="seat-tag">${seat}</span>`).join(", ")
+                : "Chưa chọn ghế nào";
+
+            checkoutBtn.disabled = selectedSeats.length === 0;
+        });
+    });
+
+    checkoutBtn.addEventListener("click", function () {
+        if (selectedSeats.length > 0) {
+            // Chuyển trang kèm dữ liệu
+            window.location.href = `/concert/pay-tickets/${concertId}?seats=${selectedSeats.join(",")}&total=${totalPrice}`;
+        }
+    });
+</script>

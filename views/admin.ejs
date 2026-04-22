@@ -1,0 +1,80 @@
+<main>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4 display-5 fw-bold text-primary text-center">
+                    📊 Dashboard Quản Trị
+                </h1>
+            </div>
+        </div>
+
+        <!-- Dòng thống kê chính -->
+        <div class="row">
+            <!-- Thêm data-category cho mỗi card -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card dashboard-card shadow-sm h-100 border-0" data-category="tickets">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold text-success">🎟️ Tổng Vé Bán Ra</h5>
+                        <p class="fs-4 fw-bold">1,200</p>
+                        <a href="#" class="btn btn-outline-primary w-100 mt-2">Xem Chi Tiết</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cập nhật các card khác tương tự -->
+        </div>
+
+        <!-- Dòng chứa danh sách vé và thông báo -->
+        <div class="row mt-4">
+            <!-- Bảng danh sách vé gần đây -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">📅 Danh Sách Vé Gần Đây</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-hover text-center">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Mã Vé</th>
+                                    <th>Khách Hàng</th>
+                                    <th>Ngày Đặt</th>
+                                    <th>Trạng Thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#12345</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>20/02/2025</td>
+                                    <td><span class="badge bg-success">✔️ Đã Thanh Toán</span></td>
+                                </tr>
+                                <!-- Các dòng khác -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thẻ thông báo -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">🔔 Thông Báo Hệ Thống</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group notification-list">
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="text-danger me-2">⚠️</span> Hệ thống sẽ bảo trì vào 01/03/2025.
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="text-success me-2">✅</span> Cập nhật phiên bản mới thành công!
+                            </li>
+                            <!-- Thêm thông báo khác -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,63 @@
+<main class="container my-4">
+    <h1 class="text-center mb-4">Danh Sách Ngày Chiếu Phim <%= movie.name %></h1>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="/admin/movie/add-date/<%= movie.id %>" class="btn btn-primary">
+            <i class="bi bi-calendar-plus"></i> Thêm Ngày Chiếu
+        </a>
+        <input type="text" class="form-control w-25 shadow-sm" placeholder="🔍 Tìm kiếm phim...">
+    </div>
+
+    <!-- Movie Table -->
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Ngày Chiếu</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <% movieDates.sort((a, b) => new Date(a.date_show) - new Date(b.date_show)); %>
+            <tbody>
+                <% if (movieDates.length > 0) { %>
+                    <% movieDates.forEach((moviedate, index) => { %>
+                        <tr class="align-middle">
+                            <td class="text-center"><%= index + 1 %></td>
+                            <td class="text-center">
+                                <a href="/admin/movie/showtime/<%= moviedate.id %>"
+                                    class="text-primary fw-bold text-decoration-none">
+                                    <%= new Date(moviedate.date_show).toLocaleDateString("vi-VN") %>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-warning btn-sm px-3">
+                                    <i class="bi bi-pencil-square"></i> Sửa
+                                </a>
+                                <button class="btn btn-danger btn-sm px-3">
+                                    <i class="bi bi-trash"></i> Xóa
+                                </button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3" class="text-center text-muted py-3">Không có ngày chiếu nào</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
+        </ul>
+    </nav>
+</main>

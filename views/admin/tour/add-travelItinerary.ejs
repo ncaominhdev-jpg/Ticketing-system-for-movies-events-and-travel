@@ -1,0 +1,47 @@
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h2 class="mb-0">Thêm Lịch Trình</h2>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="text-center text-muted mb-3">
+                        <%= tour.departure_point %> - <%= tour.destination %>
+                    </h5>
+                    <form action="/admin/tour/add-travelItinerary/<%= tour.id %>" method="POST">
+                        <div class="mb-3">
+                            <label for="travel_date" class="form-label fw-semibold">Ngày đi</label>
+                            <input type="date" class="form-control" id="travel_date" name="travel_date">
+                            <% if (errors && errors.travel_date) { %>
+                                <div class="text-danger mt-1"><%= errors.travel_date %></div>
+                            <% } %>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itinerary" class="form-label fw-semibold">Hành trình</label>
+                            <textarea class="form-control" id="itinerary" rows="4" name="itinerary"></textarea>
+                            <% if (errors && errors.itinerary) { %>
+                                <div class="text-danger mt-1"><%= errors.itinerary %></div>
+                            <% } %>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg fw-semibold">Thêm lịch trình</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.tiny.cloud/1/kopg29qtp7buegn0gvha0kw5x0640kup25llnek9z19c4r4u/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#itinerary',
+        plugins: 'lists link image code textcolor',
+        toolbar: 'undo redo | bold italic underline | fontsize fontfamily fontcolor | alignleft aligncenter alignright | bullist numlist | link image | strikethrough code',
+        menubar: false,
+        branding: false
+    });
+</script>

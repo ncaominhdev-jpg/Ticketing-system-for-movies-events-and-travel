@@ -1,0 +1,125 @@
+<head>
+    <link rel="stylesheet" href="../css/styles-layout.css">
+    <link rel="stylesheet" href="../css/contact.css">
+  </head>
+  <!-- Carousel -->
+  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../img/xem-phim-rap.jpg" class="d-block w-100" alt="Phim">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Đặt vé xem phim nhanh chóng</h5>
+                <p>Thưởng thức những bộ phim hay nhất.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../img/concert.jpg" class="d-block w-100" alt="Sự kiện">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Sự kiện nổi bật</h5>
+                <p>Không bỏ lỡ các sự kiện hấp dẫn.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../img/nha-trang.jpg" class="d-block w-100" alt="Du lịch">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Đặt tour du lịch dễ dàng</h5>
+                <p>Khám phá những điểm đến lý tưởng.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<main>
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Liên Hệ Với Chúng Tôi</h2>
+
+            <div class="contact-content">
+                <div class="row g-5">
+                    <!-- Bản đồ -->
+                    <div class="col-lg-6">
+                        <div class="contact-map">
+                            <h3 class="map-title">Vị Trí Của Chúng Tôi</h3>
+                            <div class="map-container">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.4202173141703!2d105.75697438926044!3d9.982104473816342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a08906415c355f%3A0x416815a99ebd841e!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1svi!2s!4v1737569594594!5m2!1svi!2s"
+                                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form liên hệ -->
+                    <div class="col-lg-6">
+                        <div class="contact-form">
+                            <h3 class="form-title">Gửi Thông Điệp</h3>
+                            <form class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" placeholder=" " required>
+                                    <label for="name">Họ và Tên</label>
+                                    <div class="invalid-feedback">Vui lòng nhập họ tên</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="email" placeholder=" " required>
+                                    <label for="email">Địa chỉ Email</label>
+                                    <div class="invalid-feedback">Vui lòng nhập email hợp lệ</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" rows="4" placeholder=" "
+                                        required></textarea>
+                                    <label for="message">Nội dung</label>
+                                    <div class="invalid-feedback">Vui lòng nhập nội dung</div>
+                                </div>
+
+                                <button type="submit" class="submit-btn">
+                                    <span>Gửi Ngay</span>
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thông tin liên hệ -->
+                <div class="contact-info">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-md-4">
+                            <div class="info-card">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>Địa chỉ</h4>
+                                <p>123 Đường ABC, Quận 1<br>TP.Hồ Chí Minh</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="info-card">
+                                <i class="bi bi-telephone"></i>
+                                <h4>Điện thoại</h4>
+                                <p>(028) 1234 5678<br>Hotline: 0909 123 456</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="info-card">
+                                <i class="bi bi-envelope"></i>
+                                <h4>Email</h4>
+                                <p>support@example.com<br>sales@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

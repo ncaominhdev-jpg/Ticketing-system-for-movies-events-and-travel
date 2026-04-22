@@ -1,0 +1,171 @@
+/* Thiết lập font chung và màu nền */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Container chính */
+main.container {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề trang */
+main h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 30px;
+}
+
+/* Card phim */
+.row {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.img-fluid {
+  height: 600px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 15px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.card-footer {
+  background-color: #ffffff; /* Giữ nền trắng hoặc theo màu giao diện */
+  border-top: 1px solid #ffffff; /* Viền ngăn cách phần thân và footer */
+  padding: 10px;
+}
+
+/* Nút Xem Chi Tiết và Mua Vé */
+.btn {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+.artist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Khoảng cách giữa các ca sĩ */
+  max-width: 1300px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Căn giữa */
+}
+
+.artist-item {
+  flex: 1 1 calc(20% - 20px); /* 5 ca sĩ trên 1 hàng */
+  max-width: calc(20% - 20px);
+  text-align: center;
+}
+
+.artist-item img {
+  width: 200px; /* Kích thước ảnh */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #6c757d; /* Viền ảnh */
+}
+
+.artist-item h5 {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Responsive cho các thiết bị nhỏ */
+@media (max-width: 768px) {
+  .row-cols-md-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-img-top {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-text {
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .row-cols-md-4 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .card-img-top {
+    height: 150px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    font-size: 0.75rem;
+  }
+
+  .btn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+}

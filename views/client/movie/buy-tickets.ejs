@@ -1,0 +1,149 @@
+<head>
+    <link rel="stylesheet" href="../../css/styles-layout.css">
+    <link rel="stylesheet" href="../../css/client/movie/buy-tickets.css">
+</head>
+<main class="container my-5">
+    <div class="card shadow-lg p-4">
+        <div class="card-body text-center">
+            <h1 class="fw-bold text-primary">🎬 Mua Vé Xem Phim</h1>
+            <h2 class="text-dark mt-3"><i class="bi bi-film"></i>
+                <%= movie.name %>
+            </h2>
+
+            <div class="mt-3">
+                <span class="badge bg-success fs-5 px-3 py-2">
+                    📅 Ngày chiếu: <%= new Date(movieDate.date_show).toLocaleDateString('vi-VN', { weekday: 'long' ,
+                        day: '2-digit' , month: '2-digit' , year: 'numeric' }) %>
+
+                </span>
+            </div>
+
+            <div class="mt-2">
+                <span class="badge bg-danger fs-5 px-3 py-2">
+                    ⏰ Giờ chiếu: <%= show_time %>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-lg p-4 mt-4">
+        <div class="card-body">
+            <div id="seatMap">
+                <h1 class="text-center mb-4">Sơ Đồ Ghế Rạp Phim</h1>
+
+                <div class="screen">MÀN HÌNH</div>
+
+                <div class="seat-container">
+                    <% const seatRows={ A: { seats: ['A1', 'A2' , 'A3' , 'A4' , 'A5' , 'A6' , 'A7' , 'A8' , 'A9' , 'A10'
+                        ], type: 'normal' }, B: { seats: ['B1', 'B2' , 'B3' , 'B4' , 'B5' , 'B6' , 'B7' , 'B8' , 'B9'
+                        , 'B10' ], type: 'normal' }, C: { seats: ['C1', 'C2' , 'C3' , 'C4' , 'C5' , 'C6' , 'C7' , 'C8'
+                        , 'C9' , 'C10' ], type: ['normal', 'normal' , 'normal' , 'vip' , 'vip' , 'vip' , 'vip'
+                        , 'normal' , 'normal' , 'normal' ] }, D: { seats: ['D1', 'D2' , 'D3' , 'D4' , 'D5' , 'D6' , 'D7'
+                        , 'D8' , 'D9' , 'D10' ], type: ['normal', 'normal' , 'normal' , 'vip' , 'vip' , 'vip' , 'vip'
+                        , 'normal' , 'normal' , 'normal' ] }, E: { seats: ['E1', 'E2' , 'E3' , 'E4' , 'E5' , 'E6' , 'E7'
+                        , 'E8' , 'E9' , 'E10' ], type: ['normal', 'normal' , 'normal' , 'vip' , 'vip' , 'vip' , 'vip'
+                        , 'normal' , 'normal' , 'normal' ] }, F: { seats: ['F1', 'F2' , 'F3' , 'F4' , 'F5' , 'F6' , 'F7'
+                        , 'F8' , 'F9' , 'F10' ], type: 'normal' }, G: { seats: ['G1', 'G2' , 'G3' , 'G4' , 'G5' , 'G6'
+                        , 'G7' , 'G8' , 'G9' , 'G10' ], type: 'normal' } }; Object.keys(seatRows).forEach(row=> {
+                        %>
+                        <div class="seat-row">
+                            <% seatRows[row].seats.forEach((seat, index)=> {
+                                let seatType = Array.isArray(seatRows[row].type) ? seatRows[row].type[index] :
+                                seatRows[row].type;
+                                let price = seatType === 'vip' ? vip_price : normal_price;
+                                let isReserved = reservedSeats.includes(seat);
+                                %>
+                                <button class="seat <%= seatType %> <%= isReserved ? 'reserved' : '' %>"
+                                    data-price="<%= price %>" <%=isReserved ? 'disabled' : '' %>>
+                                    <%= seat %>
+                                </button>
+                                <% }) %>
+                        </div>
+                        <% }) %>
+                </div>
+
+
+                <!-- Chú thích loại ghế -->
+                <div class="seat-legend">
+                    <span>
+                        <div class="legend-box legend-vip"></div> Ghế VIP - <%= vip_price %> VND
+                    </span>
+                    <span>
+                        <div class="legend-box legend-normal"></div> Ghế Thường - <%= normal_price %> VND
+                    </span>
+                    <span>
+
+                        <div class="legend-box legend-selected"></div> Ghế Đã Chọn
+                    </span>
+                    <span>
+                        <div class="legend-box legend-booked"></div> Ghế Đã Đặt
+                    </span>
+                </div>
+
+                <!-- Hiển thị tổng tiền -->
+                <div class="total">Tổng tiền: <span id="totalPrice">0</span> VND</div>
+
+                <!-- Nút đặt vé -->
+                <div class="btn-container">
+                    <a id="checkoutLink" class="btn btn-primary" href="#">Thanh Toán</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const seats = document.querySelectorAll(".seat");
+        const checkoutLink = document.getElementById("checkoutLink");
+        const totalPriceElement = document.getElementById("totalPrice");
+
+        let selectedSeats = [];
+        let totalPrice = 0;
+        let showtimeId = "<%= id %>";
+        const reservedSeats = JSON.parse('<%- JSON.stringify(reservedSeats) %>');
+
+        seats.forEach(seat => {
+            const seatNumber = seat.textContent.trim();
+            const seatPrice = parseInt(seat.getAttribute("data-price")) || 0;
+
+            // Đánh dấu ghế đã đặt
+            if (reservedSeats.includes(seatNumber)) {
+                seat.classList.add("booked");
+                seat.disabled = true;
+            }
+
+            // Xử lý khi click vào ghế
+            seat.addEventListener("click", function () {
+                if (this.classList.contains("booked")) return;
+
+                if (this.classList.contains("selected")) {
+                    this.classList.remove("selected");
+                    selectedSeats = selectedSeats.filter(s => s !== seatNumber);
+                    totalPrice -= seatPrice;
+                } else {
+                    this.classList.add("selected");
+                    selectedSeats.push(seatNumber);
+                    totalPrice += seatPrice;
+                }
+
+                updateTotalPrice();
+                updateCheckoutLink();
+            });
+        });
+
+        function updateTotalPrice() {
+            totalPriceElement.textContent = totalPrice.toLocaleString() + " VND";
+        }
+
+        function updateCheckoutLink() {
+            if (selectedSeats.length > 0) {
+                checkoutLink.href = `/movie/pay-tickets/${showtimeId}?seats=${selectedSeats.join(",")}&total=${totalPrice}`;
+                checkoutLink.classList.remove("disabled");
+            } else {
+                checkoutLink.href = "#";
+                checkoutLink.classList.add("disabled");
+            }
+        }
+    });
+</script>

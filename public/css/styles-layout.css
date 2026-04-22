@@ -1,0 +1,221 @@
+/* Biến CSS */
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --accent-color: #ffc107;
+    --background-color: #f8f9fa;
+    --text-color: #343a40;
+    --header-text-color: white;
+    --footer-background: #222;
+    --footer-text-color: #ccc;
+    --navbar-height: 60px;
+    --transition-speed: 0.3s;
+}
+
+/* Tổng thể */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--header-text-color);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--text-color) !important;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--header-text-color) !important;
+    font-size: 1.5rem;
+    transition: color var(--transition-speed) ease-in-out;
+}
+
+.navbar-brand:hover {
+    color: var(--accent-color) !important;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--header-text-color) !important;
+    transition: color var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+    margin: 0 10px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--accent-color) !important;
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler-icon {
+    background-color: var(--header-text-color);
+}
+
+/* Carousel */
+
+.carousel-inner img {
+    height: 500px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 8px;
+    color: var(--header-text-color);
+}
+
+.carousel-caption h5 {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    color: var(--header-text-color);
+    opacity: 0.8;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* Nội dung chính */
+.container-furled {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    flex: 1;
+}
+
+/* Footer */
+footer {
+    background: var(--footer-background);
+    color: var(--footer-text-color);
+    font-size: 14px;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease-in-out;
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        margin: 0 5px;
+    }
+
+    .carousel-inner img {
+        height: 300px;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.5rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1rem;
+    }
+
+    .container-furled {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .carousel-inner img {
+        height: 200px;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 0.9rem;
+    }
+
+    .container-furled {
+        padding: 15px;
+    }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./css/styles-layout.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Header -->
+    <header class="bg-secondary text-white text-center py-3">
+        <h1>Hệ thống bán vé online</h1>
+        <p>Đặt vé xem phim, vé sự kiện hoặc vé du lịch dễ dàng!</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top py-2">
+        <div class="container">
+            <a class="navbar-brand text-uppercase" href="/">Trang Chủ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-between w-100" id="navbarNav">
+                <!-- Links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/movie/list">Xem Phim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/concert/list">Sự Kiện</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/tour/list">Du Lịch</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/contact">Liên Hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <% if (user) { %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle active" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Hello, <%= user.name %>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="/account">👤 Tài khoản</a></li>
+                                    <li><a class="dropdown-item" href="/my-tickets">🎟 Vé đã mua</a></li>
+                                    <% if (user.status == 1) { %>
+                                        <li><a class="dropdown-item" href="/admin">⚙ Quản lý</a></li>
+                                    <% } %>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/logout">🚪 Đăng Xuất</a></li>
+                                </ul>
+                            </li>                                                     
+                        <% } else { %>
+                            <a class="nav-link active" href="/login">Đăng Nhập</a>
+                        <% } %>
+                    </li>                    
+                    <!-- tao them -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <%- body %>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <p>&copy; 2025 Hệ thống bán vé online. All rights reserved.</p>
+    </footer>
+
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

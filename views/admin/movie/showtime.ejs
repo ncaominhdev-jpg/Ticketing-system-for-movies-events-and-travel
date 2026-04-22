@@ -1,0 +1,79 @@
+
+<main class="container my-4">
+    <h1 class="text-center mb-3 fw-bold">
+        Danh Sách Giờ Chiếu Phim <span class="text-primary">
+            <%= (movie && movie.name) ? movie.name : "Không xác định" %>
+        </span>
+    </h1>
+    <h2 class="text-center mb-4 text-muted">
+        Ngày Chiếu: <span class="fw-bold">
+            <%= new Date(movieDate.date_show).toLocaleDateString("vi-VN") %>
+        </span>
+    </h2>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a href="/admin/movie/add-showtime/<%= movieDate.id %>" class="btn btn-primary shadow-sm">
+            <i class="bi bi-clock-history"></i> Thêm Giờ Chiếu
+        </a>
+        <input type="text" class="form-control w-25 shadow-sm" placeholder="🔍 Tìm kiếm giờ chiếu...">
+    </div>
+
+    <!-- Movie Table -->
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Giờ Chiếu</th>
+                    <th>Giá Vé</th>
+                    <th>Giá Vé VIP</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (movieShowtimes.length > 0) { %>
+                    <% movieShowtimes
+                        .sort((a, b) => a.show_time.localeCompare(b.show_time))
+                        .forEach((movieShowtime, index) => { %>
+                            <tr class="align-middle">
+                                <td><%= index + 1 %></td>
+                                <td class="fw-bold text-primary">
+                                    <%= movieShowtime.show_time %>
+                                </td>
+                                <td class="text-success fw-bold">
+                                    <%= Number(movieShowtime.normal_price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
+                                </td>
+                                <td class="text-danger fw-bold">
+                                    <%= Number(movieShowtime.vip_price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) %>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm">
+                                        <i class="bi bi-pencil-square"></i> Sửa
+                                    </button>
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5" class="text-center text-muted py-3">Không có giờ chiếu nào</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
+        </ul>
+    </nav>
+</main>

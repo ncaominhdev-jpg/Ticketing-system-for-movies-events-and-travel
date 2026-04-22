@@ -1,0 +1,127 @@
+<head>
+  <link rel="stylesheet" href="../../css/styles-layout.css">
+</head>
+<main>
+  <!-- Ticket Payment Page -->
+  <section id="ticket-checkout" class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Thanh Toán Vé Online</h2>
+    <div class="row g-4">
+      <!-- Cột Hình Ảnh -->
+      <div class="col-md-7 d-flex">
+        <div class="card shadow border rounded-4 w-100 h-100">
+          <div class="card-body p-0">
+            <img src="../../img/<%= concert.image_url %>" alt="Hình vé" class="card-img-top w-100 h-100 object-fit-cover rounded-3">
+          </div>
+        </div>
+      </div>      
+
+      <!-- Cột Thông Tin (Khách Hàng + Vé) -->
+      <div class="col-md-5 d-flex">
+        <div class="d-flex flex-column w-100 h-100">
+
+          <!-- Thông Tin Khách Hàng -->
+          <div class="card shadow border rounded-4 mb-3 flex-grow-1">
+            <div class="card-body">
+              <h4 class="card-title text-center fw-bold">Thông Tin Khách Hàng</h4>
+              <form>
+                <div class="mb-3">
+                  <label for="fullName" class="form-label fw-semibold">Họ và Tên</label>
+                  <input type="text" class="form-control" id="fullName" value="<%= user.name %>" readonly>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label fw-semibold">Email</label>
+                  <input type="email" class="form-control" id="email" value="<%= user.email %>" readonly>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Thông Tin Vé -->
+          <div class="card shadow border rounded-4 flex-grow-1">
+            <div class="card-body">
+              <h4 class="card-title text-center fw-bold">Thông Tin Vé</h4>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Sự Kiện:</strong>
+                  <%= concert.name %>
+                </li>
+                <li class="list-group-item"><strong>Ngày:</strong>
+                  <%= concert.event_date %>
+                </li>
+                <li class="list-group-item"><strong>Thời Gian:</strong>
+                  <%= concert.start_time %>
+                </li>
+                <li class="list-group-item"><strong>Ghế:</strong>
+                  <%= selectedSeats.length ? selectedSeats.join(", ") : " Chưa chọn ghế" %>
+                </li>
+                <li class="list-group-item"><strong>Tổng Tiền:</strong>
+                  <%= totalPrice ? totalPrice.toLocaleString() : "0" %> VND
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Phương Thức Thanh Toán -->
+    <div class="card shadow border rounded-4 mt-4">
+      <div class="card-body">
+        <h4 class="card-title text-center fw-bold">Phương Thức Thanh Toán</h4>
+        <form class="text-center">
+          <div class="mb-3">
+            <div class="form-check d-flex align-items-center justify-content-center">
+              <input class="form-check-input me-2" type="radio" name="paymentMethod" id="paymentMomo" value="momo"
+                checked>
+              <label class="form-check-label fw-semibold" for="paymentMomo">Thanh Toán Qua MoMo</label>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary w-100 py-2 fw-bold" onclick="confirmPayment()">
+            <i class="bi bi-credit-card-fill"></i> Xác Nhận Thanh Toán
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="paymentToast" class="toast align-items-center text-white bg-success border-0" role="alert"
+      aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body fw-bold">
+          Thanh toán thành công!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript -->
+  <script>
+    function confirmPayment() {
+      const user_id = Number('<%- user.id%>'); // Chuyển user_id thành số
+      const concert_id = '<%- concert.id %>';
+      const selected_seats = JSON.parse('<%- JSON.stringify(selectedSeats) %>');
+      const total_price = Number('<%- totalPrice %>'); // Chuyển total_price thành số
+
+      fetch(`/concert/pay-tickets/${concert_id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id, concert_id, selected_seats, total_price })
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message);
+          if (data.order) {
+            window.location.href = '/';
+          }
+        })
+        .catch(error => console.error('Lỗi:', error));
+    }
+  </script>
+</main>

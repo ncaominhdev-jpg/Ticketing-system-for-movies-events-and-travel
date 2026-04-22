@@ -1,0 +1,157 @@
+/* CSS chung */
+.schedule-picker {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.screen {
+  background: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin: 2rem 0;
+  border-radius: 5px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.seat-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.seat {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Màu sắc các loại ghế */
+.seat.normal {
+  background-color: #9b59b6;
+  color: white;
+}
+
+.seat.vip {
+  background-color: #e67e22;
+  color: white;
+}
+
+.seat.booked {
+  background-color: #bdc3c7 !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.seat.selected {
+  background-color: #3498db !important;
+  transform: scale(1.1);
+}
+
+/* Hiệu ứng hover */
+.seat:not(.booked):hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Chú thích */
+.seat-legend {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.legend-box {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 8px;
+  border-radius: 3px;
+}
+
+.legend-vip {
+  background-color: #e67e22;
+}
+.legend-normal {
+  background-color: #9b59b6;
+}
+.legend-selected {
+  background-color: #3498db;
+}
+.legend-booked {
+  background-color: #bdc3c7;
+}
+
+/* Phần tổng tiền */
+.total {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 2rem 0;
+  color: #2c3e50;
+}
+
+.btn-container {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#bookButton {
+  padding: 0.8rem 2.5rem;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+#bookButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .seat {
+    width: 35px;
+    height: 35px;
+    font-size: 0.8rem;
+  }
+
+  .seat-legend {
+    gap: 1rem;
+  }
+
+  .total {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .seat {
+    width: 30px;
+    height: 30px;
+  }
+
+  .seat-row {
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+}

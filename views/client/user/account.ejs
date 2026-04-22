@@ -1,0 +1,44 @@
+<head>
+    <link rel="stylesheet" href="../css/styles-layout.css">
+</head>
+<main class="container mt-4">
+    <h2 class="text-center">Thông Tin Tài Khoản</h2>
+
+    <% if (user) { %>
+        <div class="card mx-auto p-3">
+            <div class="row g-3 align-items-center">
+                <!-- Avatar bên trái -->
+                <div class="col-md-7 text-center">
+                    <img src="../../img/<%= user.avatar ? user.avatar : 'default-avatar.jpg' %>" alt="Avatar của <%= user.name %>"
+                        class="rounded-circle"
+                        style="width: 500px; height: 500px; object-fit: cover; border: 3px solid #ddd;">
+                </div>
+
+                <!-- Thông tin bên phải -->
+                <div class="col-md-5">
+                    <h5 class="card-title">Xin chào, <%= user.name %>!</h5>
+                    <p class="card-text"><strong>Email:</strong>
+                        <%= user.email %>
+                    </p>
+                    <p class="card-text">
+                        <strong>Vai trò:</strong>
+                        <% if (user.role==1) { %> Quản trị viên
+                            <% } else if (user.role==2) { %> Người dùng
+                                <% } else { %> Vai trò không xác định <% } %>
+                    </p>
+                    <p class="card-text"><strong>Trạng thái:</strong>
+                        <%= user.status ? "Hoạt động" : "Bị khóa" %>
+                    </p>
+
+                    <!-- Nút đăng xuất -->
+                    <a href="/logout" class="btn btn-danger">Đăng Xuất</a>
+                    <a href="/update-password" class="btn btn-success">Đổi Mật Khẩu</a>
+                    <a href="/update-account" class="btn btn-secondary">Cập Nhật Tài Khoản</a>
+                </div>
+            </div>
+        </div>
+
+        <% } else { %>
+            <p class="text-center">Bạn chưa đăng nhập. <a href="/login">Đăng nhập ngay</a></p>
+            <% } %>
+</main>
