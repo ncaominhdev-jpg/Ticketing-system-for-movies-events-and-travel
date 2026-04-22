@@ -1,0 +1,87 @@
+
+<main class="container my-5">
+    <div class="row">
+        <!-- Hình ảnh Concert -->
+        <div class="col-md-6 d-flex justify-content-center">
+            <div class="rounded overflow-hidden shadow-lg" style="max-height: 400px;">
+                <img src="<%= concert.image_url ? '/img/' + concert.image_url : '/img/default-concert.jpg' %>"
+                    class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Poster Concert">
+            </div>
+        </div>
+
+        <!-- Thông tin Concert -->
+        <div class="col-md-6">
+            <h1 class="mb-3">
+                <%= concert.name %>
+            </h1>
+            <p><strong>Ngày tổ chức: </strong>
+                <%= new Date(concert.event_date).toLocaleDateString('vi-VN') %>
+            </p>
+            <p><strong>Địa điểm: </strong>
+                <%= concert.location %>
+            </p>
+            <p><strong>Thời gian: </strong>
+                <%= concert.start_time %>
+            </p>
+            <p><strong>Giá vé VIP: </strong>
+                <%= Number(concert.vip_price).toLocaleString('vi-VN', { style: 'currency' , currency: 'VND' }) %>
+            </p>
+
+            <p><strong>Giá vé thường: </strong>
+                <%= Number(concert.normal_price).toLocaleString('vi-VN', { style: 'currency' , currency: 'VND' }) %>
+            </p>
+            <p class="mb-4"><strong>Mô tả: </strong>
+                <%= concert.description %>
+            </p>
+            <p class="mt-4"><strong>Thời gian tạo: </strong>
+                <%= new Date(concert.createdAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) %>
+            </p>
+            <p class="mt-4"><strong>Thời gian cập nhật gần nhất: </strong>
+                <%= new Date(concert.updatedAt).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }) %>
+            </p>
+            <div class="d-flex gap-2 mt-3">
+                <a href="/admin/concert/edit/<%= concert.id %>" class="btn btn-outline-warning">
+                    <i class="bi bi-pencil"></i> Chỉnh sửa
+                </a>
+                <a href="/admin/delete-concert/<%= concert.id %>" class="btn btn-outline-danger">
+                    <i class="bi bi-trash"></i> Xóa
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <h2 class="text-center">Nghệ sĩ biểu diễn</h2>
+        <a href="/admin/concert/add-artist/<%= concert.id %>" class="btn btn-success">Thêm Ca Sĩ</a>
+    </div>
+    
+    <% if (artistImages.length> 0) { %>
+        <div class="row mt-3">
+            <% artistImages.forEach(artist=> { %>
+                <div class="col-6 col-md-4 col-lg-2 text-center mt-3">
+                    <div class="rounded-circle overflow-hidden mx-auto border border-2 shadow-sm"
+                        style="width: 120px; height: 120px; aspect-ratio: 1/1; transition: all 0.3s; cursor: pointer;"
+                        onmouseover="this.style.transform='scale(1.05)';" 
+                        onmouseout="this.style.transform='scale(1)';">
+                        <img src="<%= artist.image_url ? '/img/' + artist.image_url : '/img/default-artist.jpg' %>"
+                            class="img-fluid w-100 h-100" style="object-fit: cover;" alt="<%= artist.artist_name %>">
+                    </div>
+                    <h6 class="mt-2">
+                        <%= artist.artist_name %>
+                    </h6>
+                    <a href="/admin/concert/edit-artist/<%= artist.id %>" class="btn btn-sm btn-primary">
+                        <i class="bi bi-pencil"></i> Sửa
+                    </a>
+                    <a href="/admin/concert/delete-artist/<%= artist.id %>" class="btn btn-sm btn-danger"
+                        onclick="return confirm('Bạn có chắc chắn muốn xóa nghệ sĩ này?');">
+                        <i class="bi bi-trash"></i> Xóa
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p class="text-center mt-4"><strong>Chưa có thông tin nghệ sĩ biểu diễn.</strong></p>
+    <% } %>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

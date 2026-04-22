@@ -1,0 +1,161 @@
+/* Dashboard Styles */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f1c40f;
+    --danger-color: #e74c3c;
+    --info-color: #2980b9;
+}
+
+/* Card Styling */
+.dashboard-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.card-text {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Custom Card Colors */
+.card[data-category="tickets"] {
+    border-left: 4px solid var(--secondary-color);
+}
+
+.card[data-category="movies"] {
+    border-left: 4px solid var(--success-color);
+}
+
+.card[data-category="users"] {
+    border-left: 4px solid var(--warning-color);
+}
+
+.card[data-category="revenue"] {
+    border-left: 4px solid var(--danger-color);
+}
+
+/* Button Styling */
+.dashboard-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.dashboard-btn-primary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.dashboard-btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Table Styling */
+.recent-tickets-table {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.recent-tickets-table thead {
+    background: var(--primary-color);
+    color: white;
+}
+
+.recent-tickets-table th {
+    font-weight: 500;
+    padding: 1rem;
+}
+
+.recent-tickets-table td {
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+.recent-tickets-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Badge Styling */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.bg-warning {
+    background-color: var(--warning-color) !important;
+    color: var(--primary-color);
+}
+
+.bg-danger {
+    background-color: var(--danger-color) !important;
+}
+
+/* Notification Panel */
+.notification-card {
+    border-radius: 15px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+}
+
+.notification-list {
+    border: none;
+}
+
+.notification-item {
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-text {
+        font-size: 1.5rem;
+    }
+    
+    .recent-tickets-table {
+        font-size: 0.9rem;
+    }
+}

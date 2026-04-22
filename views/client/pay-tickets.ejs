@@ -1,0 +1,97 @@
+<main>
+  <!-- Ticket Payment Page -->
+  <section id="ticket-checkout" class="container my-5">
+    <h2 class="text-center mb-4">Thanh Toán Vé Online</h2>
+    <div class="row g-4">
+      <!-- Cột Hình Ảnh -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <img src="./img/poster-phim.jpg" alt="Hình vé" class="card-img-top">
+          </div>
+        </div>
+      </div>
+
+      <!-- Cột Thông Tin Vé -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-center">Thông Tin Vé</h4>
+            <p><strong>Rạp:</strong> Galaxy Cinema</p>
+            <p><strong>Phim:</strong> Avengers: Endgame</p>
+            <p><strong>Thời Gian:</strong> 19:00, 25/01/2025</p>
+            <p><strong>Ghế:</strong> A1, A2, A3</p>
+            <p><strong>Tổng Tiền:</strong> 450,000 VND</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cột Thông Tin Khách Hàng -->
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-center">Thông Tin Khách Hàng</h4>
+            <form>
+              <div class="mb-3">
+                <label for="fullName" class="form-label">Họ và Tên</label>
+                <input type="text" class="form-control" id="fullName" value="Nguyễn Văn A" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" value="nguyenvana@example.com" disabled>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Số Điện Thoại</label>
+                <input type="text" class="form-control" id="phone" value="0901234567" disabled>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phương Thức Thanh Toán -->
+    <div class="card mt-4">
+      <div class="card-body">
+        <h4 class="card-title text-center">Phương Thức Thanh Toán</h4>
+        <form>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMomo" value="momo" checked>
+              <label class="form-check-label" for="paymentMomo">Thanh Toán Qua MoMo</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="paymentBank" value="bank">
+              <label class="form-check-label" for="paymentBank">Thanh Toán Qua Ngân Hàng</label>
+            </div>
+          </div>
+          <div class="text-center">
+            <img src="https://via.placeholder.com/200?text=QR+Code" alt="QR Code" class="img-fluid mb-3">
+            <p>Quét mã QR để hoàn tất thanh toán</p>
+          </div>
+          <button type="button" class="btn btn-primary w-100" onclick="confirmPayment()">Xác Nhận Thanh Toán</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    function confirmPayment() {
+      Swal.fire({
+        title: 'Đặt Vé Thành Công!',
+        html: `
+                <p><b>Rạp:</b> Galaxy Cinema</p>
+                <p><b>Phim:</b> Avengers: Endgame</p>
+                <p><b>Thời Gian:</b> 19:00, 25/01/2025</p>
+                <p><b>Ghế:</b> A1, A2, A3</p>
+            `,
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+        background: '#f9f9f9'
+      });
+    }
+  </script>
+
+</main>

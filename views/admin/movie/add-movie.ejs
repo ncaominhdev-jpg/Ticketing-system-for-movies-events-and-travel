@@ -1,0 +1,123 @@
+<main class="container my-5">
+    <h1 class="text-center mb-4 text-primary">Thêm Phim Mới</h1>
+
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <form action="/admin/movie/add" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <!-- Cột 1 -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="movie-name" class="form-label fw-bold">Tên Phim</label>
+                            <input type="text" id="movie-name" name="name" class="form-control"
+                                placeholder="Nhập tên phim">
+                            <span class="text-danger">
+                                <% if (errors && errors.name) { %>
+                                    <%= errors.name %>
+                                        <% } %>
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="movie-genre" class="form-label fw-bold">Thể Loại</label>
+                            <input type="text" id="movie-genre" name="genre" class="form-control"
+                                placeholder="Nhập thể loại">
+                            <span class="text-danger">
+                                <% if (errors && errors.genre) { %>
+                                    <%= errors.genre %>
+                                        <% } %>
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="movie-director" class="form-label fw-bold">Đạo diễn</label>
+                            <input type="text" id="movie-director" name="director" class="form-control">
+                            <span class="text-danger">
+                                <% if (errors && errors.director) { %>
+                                    <%= errors.director %>
+                                        <% } %>
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="release_date" class="form-label fw-bold">Ngày Phát Hành</label>
+                            <input type="date" id="release_date" name="release_date" class="form-control">
+                            <span class="text-danger">
+                                <% if (errors && errors.release_date) { %>
+                                    <%= errors.release_date %>
+                                        <% } %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Cột 2 -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="movie-actors" class="form-label fw-bold">Diễn viên</label>
+                            <input type="text" id="movie-actors" name="actors" class="form-control">
+                            <span class="text-danger">
+                                <% if (errors && errors.actors) { %>
+                                    <%= errors.actors %>
+                                        <% } %>
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="movie-description" class="form-label fw-bold">Mô Tả</label>
+                            <textarea id="movie-description" name="description" class="form-control"
+                                rows="4"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="movie-image_url" class="form-label fw-bold">Hình Ảnh Poster</label>
+                            <input type="file" id="movie-image_url" name="image_url" accept="image/*"
+                                class="form-control">
+                            <span class="text-danger">
+                                <% if (errors && errors.image_url) { %>
+                                    <%= errors.image_url %>
+                                        <% } %>
+                            </span>
+                            <!-- Xem trước ảnh -->
+                            <div class="mt-2">
+                                <img id="preview-image" src="#" alt="Xem trước hình ảnh" class="img-thumbnail d-none"
+                                    width="200">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="movie-status" class="form-label fw-bold">Trạng Thái</label>
+                            <select id="movie-status" name="status" class="form-select">
+                                <option value="1">Hiển thị</option>
+                                <option value="2">Ẩn</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nút Submit -->
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/admin/movie/list" class="btn btn-outline-secondary">Hủy</a>
+                    <button type="submit" class="btn btn-primary">Thêm Phim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<script>
+    document.getElementById("movie-image_url").addEventListener("change", function (event) {
+        const file = event.target.files[0]; // Lấy file đầu tiên
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const previewImage = document.getElementById("preview-image");
+                previewImage.src = e.target.result;
+                previewImage.classList.remove("d-none"); // Hiển thị ảnh xem trước
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+<script src="https://cdn.tiny.cloud/1/kopg29qtp7buegn0gvha0kw5x0640kup25llnek9z19c4r4u/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>

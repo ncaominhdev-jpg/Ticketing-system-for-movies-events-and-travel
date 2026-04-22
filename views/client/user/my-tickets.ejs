@@ -1,0 +1,116 @@
+<main class="container my-5">
+    <h1 class="text-center mb-4">🎫 Vé của bạn</h1>
+
+    <!-- Vé phim -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0">🎬 Vé phim</h2>
+            </div>
+            <div class="card-body">
+                <% if (movieTickets.length > 0) { %>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>Tên phim</th>
+                                    <th>Ngày chiếu</th>
+                                    <th>Ghế ngồi</th>
+                                    <th>Giá vé</th>
+                                    <th>Ngày đặt</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <% movieTickets.forEach(ticket => { %>
+                                    <tr>
+                                        <td><%= movie.name %></td>
+                                        <td><%= movieDate.date_show %></td>
+                                        <td><%= ticket.selected_seats %></td>
+                                        <td><%= ticket.total_price %> VND</td>
+                                        <td><%= ticket.createdAt.toLocaleDateString("vi-VN") %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <div class="alert alert-warning text-center">Bạn chưa đặt vé phim nào.</div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vé concert -->
+    <section class="mb-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h2 class="h4 mb-0">🎤 Vé concert</h2>
+            </div>
+            <div class="card-body">
+                <% if (concertTickets.length > 0) { %>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>Tên concert</th>
+                                    <th>Ghế ngồi</th>
+                                    <th>Giá vé</th>
+                                    <th>Ngày đặt</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <% concertTickets.forEach(ticket => { %>
+                                    <tr>
+                                        <td><%= ticket.Concert.name %></td>
+                                        <td><%= ticket.selected_seats %></td>
+                                        <td><%= ticket.total_price %> VND</td>
+                                        <td><%= ticket.createdAt.toLocaleDateString("vi-VN") %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <div class="alert alert-warning text-center">Bạn chưa đặt vé concert nào.</div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vé tour -->
+    <section>
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h2 class="h4 mb-0">🌍 Vé tour</h2>
+            </div>
+            <div class="card-body">
+                <% if (tourTickets.length > 0) { %>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark text-center">
+                                <tr>
+                                    <th>Tên tour</th>
+                                    <th>Ghế ngồi</th>
+                                    <th>Giá vé</th>
+                                    <th>Ngày đặt</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <% tourTickets.forEach(ticket => { %>
+                                    <tr>
+                                        <td><%= ticket.Tour.name %></td>
+                                        <td><%= ticket.selected_seats %></td>
+                                        <td><%= ticket.total_price %> VND</td>
+                                        <td><%= ticket.createdAt.toLocaleDateString("vi-VN") %></td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <div class="alert alert-warning text-center">Bạn chưa đặt vé tour nào.</div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+</main>

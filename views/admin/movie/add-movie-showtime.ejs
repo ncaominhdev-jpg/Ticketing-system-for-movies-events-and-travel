@@ -1,0 +1,51 @@
+<main class="container my-4">
+    <h1 class="text-center mb-4 text-primary">Thêm Giờ Chiếu Phim <%= movie_date.date_show %></h1>
+
+    <div class="card shadow-lg rounded-3">
+        <div class="card-body py-4 px-5">
+            <!-- Add Movie Showtime Form -->
+            <form action="/admin/movie/add-showtime/<%= movie_date.id %>" method="POST">
+                <!-- Giờ Chiếu -->
+                <div class="mb-3">
+                    <label for="show_time" class="form-label fw-bold">Giờ Chiếu</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                        <input type="time" id="show_time" name="show_time" class="form-control">
+                    </div>
+                    <span class="text-danger">
+                        <% if (errors && errors.show_time) { %>
+                            <%= errors.show_time %>
+                        <% } %>
+                    </span>
+                </div>
+
+                <!-- Giá Vé -->
+                <div class="mb-3">
+                    <label for="normal_price" class="form-label fw-bold">Giá Vé</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-cash"></i></span>
+                        <input type="text" id="normal_price" name="normal_price" class="form-control" placeholder="Nhập giá vé">
+                    </div>
+                    <span class="text-danger">
+                        <% if (errors && errors.normal_price) { %>
+                            <%= errors.normal_price %>
+                        <% } %>
+                    </span>
+                </div>
+            
+                <!-- Nút Hủy & Xác Nhận -->
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/admin/movie/showtime/<%= movie_date.id %>" class="btn btn-outline-secondary">
+                        <i class="bi bi-x-circle"></i> Hủy
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Thêm Giờ Chiếu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- Thêm Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">

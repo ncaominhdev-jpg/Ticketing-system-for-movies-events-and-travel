@@ -1,0 +1,94 @@
+<main class="container my-4">
+    <div class="card shadow-lg p-4">
+        <h1 class="text-center mb-4">Thêm Sự Kiện - Concert</h1>
+
+        <form action="/admin/concert/add" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <!-- Tên Sự Kiện -->
+                <div class="mb-3 col-md-6">
+                    <label for="name" class="form-label fw-bold"><i class="bi bi-music-note-beamed"></i> Tên Sự Kiện</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên sự kiện"
+                        value="<%= formData ? formData.name : '' %>">
+                    <span class="text-danger"><%= errors?.name || '' %></span>
+                </div>
+
+                <!-- Ngày Giờ -->
+                <div class="mb-3 col-md-3">
+                    <label for="event_date" class="form-label fw-bold"><i class="bi bi-calendar-event"></i> Ngày</label>
+                    <input type="date" class="form-control" id="event_date" name="event_date"
+                        value="<%= formData ? formData.event_date : '' %>">
+                    <span class="text-danger"><%= errors?.event_date || '' %></span>
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="start_time" class="form-label fw-bold"><i class="bi bi-clock"></i> Giờ</label>
+                    <input type="time" class="form-control" id="start_time" name="start_time"
+                        value="<%= formData ? formData.start_time : '' %>">
+                    <span class="text-danger"><%= errors?.start_time || '' %></span>
+                </div>
+
+                <!-- Địa Điểm -->
+                <div class="mb-3 col-md-6">
+                    <label for="location" class="form-label fw-bold"><i class="bi bi-geo-alt"></i> Địa Điểm</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Nhập địa điểm"
+                        value="<%= formData ? formData.location : '' %>">
+                    <span class="text-danger"><%= errors?.location || '' %></span>
+                </div>
+
+                <!-- Giá vé -->
+                <div class="mb-3 col-md-3">
+                    <label for="vip_price" class="form-label fw-bold"><i class="bi bi-star-fill text-warning"></i> Vé VIP</label>
+                    <input type="text" id="vip_price" name="vip_price" class="form-control" placeholder="Nhập giá vé VIP"
+                        value="<%= formData ? formData.vip_price : '' %>">
+                    <span class="text-danger"><%= errors?.vip_price || '' %></span>
+                </div>
+
+                <div class="mb-3 col-md-3">
+                    <label for="normal_price" class="form-label fw-bold"><i class="bi bi-ticket-perforated"></i> Vé Thường</label>
+                    <input type="text" id="normal_price" name="normal_price" class="form-control"
+                        placeholder="Nhập giá vé thường" value="<%= formData ? formData.normal_price : '' %>">
+                    <span class="text-danger"><%= errors?.normal_price || '' %></span>
+                </div>
+
+                <!-- Mô Tả -->
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-bold"><i class="bi bi-chat-left-text"></i> Mô Tả</label>
+                    <textarea id="description" name="description" class="form-control" rows="3"
+                        placeholder="Nhập mô tả sự kiện..."><%= formData ? formData.description : '' %></textarea>
+                    <span class="text-danger"><%= errors?.description || '' %></span>
+                </div>
+
+                <!-- Hình ảnh -->
+                <div class="mb-3 text-center">
+                    <label for="image_url" class="form-label fw-bold"><i class="bi bi-image"></i> Hình ảnh</label>
+                    <input type="file" id="image_url" name="image_url" accept="image/*" class="form-control" onchange="previewImage(event)">
+                    <span class="text-danger"><%= errors?.image_url || '' %></span>
+                    
+                    <!-- Hiển thị ảnh xem trước -->
+                    <div class="mt-3">
+                        <img id="preview" class="img-thumbnail shadow-sm rounded" 
+                            src="<%= formData?.image_url ? `/img/${formData.image_url}` : '/img/default-image.jpg' %>"
+                            alt="Xem trước hình ảnh" width="300">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút Gửi -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-plus-circle"></i> Thêm Sự Kiện
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            document.getElementById('preview').src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

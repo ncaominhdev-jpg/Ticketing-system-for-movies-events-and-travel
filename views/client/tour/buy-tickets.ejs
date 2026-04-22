@@ -1,0 +1,114 @@
+<head>
+    <link rel="stylesheet" href="../../../css/styles-layout.css">
+    <link rel="stylesheet" href="../../css/client/tour/buy-tickets.css">
+</head>
+<main class="container mt-5">
+    <div class="row g-4">
+        <!-- Thông tin vé và hình ảnh -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="mb-2 fw-bold text-center">Thông Tin Vé Du Lịch</h4>
+                    <div class="info-box p-3 text-center">
+                        <h5 class="fw-bold text-primary">
+                            <%= tour.departure_point %> ➝ <%= tour.destination %>
+                        </h5>
+                        <p><strong>Bắt đầu:</strong>
+                            <%= tour.departure_date %>
+                        </p>
+                        <p><strong>Kết thúc:</strong>
+                            <%= tour.end_date %>
+                        </p>
+                        <p><strong>Thời gian:</strong>
+                            <%= totalDays %> ngày <%= totalNights %> đêm
+                        </p>
+                        <p><strong>Giá mỗi vé:</strong> <span class="text-danger fw-bold">
+                                <%= tour.price %>
+                            </span> VND/người</p>
+                    </div>
+                    <!-- Hình ảnh tour -->
+                    <div class="card-body">
+                        <img src="<%= '../../img/' + tour.image_url %>" class="w-100 poster" alt="Tour Poster">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sơ đồ ghế -->
+        <div class="col-md-6 mb-5">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h4 class="mb-3 fw-bold">Chọn Ghế Ngồi</h4>
+                    <div class="bus-seating d-flex flex-column align-items-center">
+                        <% seats.forEach((row, rowIndex)=> { %>
+                            <div class="seat-row d-flex justify-content-center mb-2">
+                                <% row.forEach((seat, colIndex)=> { %>
+                                    <% if (seat==='' ) { %>
+                                        <div class="seat gap-2" style="width: 40px;"></div> <!-- Lối đi -->
+                                        <% } else { let isBooked=orders.some(order=>
+                                            order.selected_seats.includes(seat));
+                                            %>
+                                            <button
+                                                class="seat btn <%= isBooked ? 'btn-danger' : 'btn-outline-primary' %> m-1 fw-bold"
+                                                id="<%= seat %>" onclick="selectSeat('<%= seat %>')" <%=isBooked
+                                                ? 'disabled' : '' %>>
+                                                <%= seat %>
+                                            </button>
+                                            <% } %>
+                                                <% }); %>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <!-- Hiển thị tổng giá -->
+                    <div id="totalPrice" class="mt-3">
+                        <h5 class="fw-bold">Tổng Giá: <span id="priceAmount">0</span> VND</h5>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút đặt vé -->
+        <a href="pay-tickets" id="bookButton" class="btn btn-primary w-100 disabled mt-2 mb-5"
+            onclick="submitBooking(event)">Đặt Vé</a>
+    </div>
+
+    <script>
+        const selectedSeats = [];
+        const pricePerSeat = '<%= tour.price %>'; // Giá mỗi vé lấy từ dữ liệu tour
+
+        function selectSeat(seatId) {
+            const seat = document.getElementById(seatId);
+
+            if (selectedSeats.includes(seatId)) {
+                selectedSeats.splice(selectedSeats.indexOf(seatId), 1);
+                seat.classList.remove("btn-success");
+                seat.classList.add("btn-outline-primary");
+            } else {
+                selectedSeats.push(seatId);
+                seat.classList.remove("btn-outline-primary");
+                seat.classList.add("btn-success");
+            }
+
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const totalPrice = selectedSeats.length * pricePerSeat;
+            document.getElementById("priceAmount").innerText = totalPrice.toLocaleString();
+
+            const bookButton = document.getElementById("bookButton");
+
+            if (selectedSeats.length > 0) {
+                bookButton.href = `/tour/pay-tickets/<%= tour.id %>?seats=${selectedSeats.join(",")}&total=${totalPrice}`;
+                bookButton.classList.remove("disabled");
+            } else {
+                bookButton.href = "#";
+                bookButton.classList.add("disabled");
+            }
+        }
+
+
+    </script>
+
+</main>

@@ -1,0 +1,98 @@
+
+<main class="container my-4">
+    <h1 class="mb-4">Danh Sách Quản Lý Phim</h1>
+
+    <!-- Action Bar -->
+    <div class="d-flex justify-content-between mb-3">
+        <input type="text" id="search" class="form-control w-25" placeholder="🔍 Tìm kiếm phim...">
+    </div>
+
+    <!-- Movie Table -->
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>#</th>
+                <th>Tên Phim</th>
+                <th>Thể Loại</th>
+                <th>Ngày Phát Hành</th>
+                <th>Trạng Thái</th>
+                <th>Hành Động</th>
+                <th>Hiển Thị</th>
+            </tr>
+        </thead>
+        <tbody id="movieTable">
+            <% if (movies.length > 0) { %>
+                <% movies.forEach((movie, index) => { %>
+                    <tr>
+                        <td class="text-center"><%= index + 1 %></td>
+                        <td class="text-center">
+                            <a href="/admin/movie/date/<%= movie.id %>" class="text-primary text-decoration-none fw-bold">
+                                <%= movie.name %>
+                            </a>
+                        </td>
+                        <td class="text-center"><%= movie.genre %></td>
+                        <td class="text-center"><%= new Date(movie.release_date).toLocaleDateString("vi-VN") %></td>
+                        <td class="text-center">
+                            <% if (new Date(movie.release_date) <= new Date()) { %>
+                                <span class="badge bg-success">Công Chiếu</span>
+                            <% } else { %>
+                                <span class="badge bg-secondary">Chưa Công Chiếu</span>
+                            <% } %>
+                        </td>
+                        <td class="text-center">
+                            <a href="/admin/movie/edit/<%= movie.id %>" class="btn btn-warning btn-sm">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <button class="btn btn-danger btn-sm" onclick="confirmDelete('<%= movie.id %>')">
+                                <i class="bi bi-trash"></i> Xóa
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <% if (movie.status === 2) { %>
+                                <span class="badge bg-danger">Đã Ẩn</span>
+                            <% } else { %>
+                                <span class="badge bg-primary">Đang Hiển Thị</span>
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="7" class="text-center text-muted">Không có phim nào</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Tiếp</a></li>
+        </ul>
+    </nav>
+</main>
+
+<!-- JavaScript -->
+<script>
+    // Xác nhận trước khi xóa
+    function confirmDelete(movieId) {
+        if (confirm("Bạn có chắc chắn muốn xóa phim này?")) {
+            window.location.href = "/admin/movie/delete/" + movieId;
+        }
+    }
+
+    // Tìm kiếm phim theo tên
+    document.getElementById("search").addEventListener("keyup", function () {
+        let keyword = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#movieTable tr");
+
+        rows.forEach(row => {
+            let movieName = row.querySelector("td:nth-child(2)").textContent.toLowerCase();
+            row.style.display = movieName.includes(keyword) ? "" : "none";
+        });
+    });
+</script>

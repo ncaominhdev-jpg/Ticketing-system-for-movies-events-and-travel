@@ -1,0 +1,225 @@
+<head>
+    <link rel="stylesheet" href="../../css/styles-layout.css">
+    <link rel="stylesheet" href="../../css/client/movie/list.css">
+    <link rel="stylesheet" href="../../css/customer-review.css">
+</head>
+<!-- Carousel -->
+<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../../img/xem-phim-rap.jpg" class="d-block w-100" alt="Phim">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Đặt vé xem phim nhanh chóng</h5>
+                <p>Thưởng thức những bộ phim hay nhất.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../../img/concert.jpg" class="d-block w-100" alt="Sự kiện">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Sự kiện nổi bật</h5>
+                <p>Không bỏ lỡ các sự kiện hấp dẫn.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../../img/nha-trang.jpg" class="d-block w-100" alt="Du lịch">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Đặt tour du lịch dễ dàng</h5>
+                <p>Khám phá những điểm đến lý tưởng.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<main class="container my-5">
+    <!-- Thông tin chi tiết phim -->
+    <div class="row">
+        <div class="col-md-5">
+            <img src="<%='../../img/' + movie.image_url %>" class="img-fluid rounded" alt="<%= movie.name %>">
+        </div>
+        <div class="col-md-7">
+            <h1 class="mb-3">
+                <%= movie.name %>
+            </h1>
+            <p><strong>Thể loại:</strong>
+                <%= movie.genre %>
+            </p>
+            <p><strong>Đạo diễn:</strong>
+                <%= movie.director %>
+            </p>
+            <p><strong>Diễn viên:</strong>
+                <%= movie.actors %>
+            </p>
+            <p>
+                <% if (new Date(movie.release_date) < new Date()) { %>
+                    <h5><span class="text-success">Đang công chiếu</span></h5>
+                    <% } else { %>
+                        <strong>Ngày công chiếu: </strong>
+                        <%= new Date(movie.release_date).toLocaleDateString('vi-VN') %>
+                            <h5><span class="text-warning">Sắp công chiếu</span></h5>
+                            <% } %>
+            </p>
+            <p class="mb-4">
+                <%= movie.description %>
+            </p>
+
+            <% if (user) { %>
+                <button onclick="toggleBookingForm()" class="btn btn-primary">Mua Vé</button>
+                <% } else { %>
+                    <a href="/login" class="btn btn-primary">Đăng nhập để mua vé</a>
+                    <% } %>
+
+                        <!-- Form chọn ngày & suất chiếu (ẩn mặc định) -->
+                        <div class="mt-4" id="bookingForm" style="display: none;">
+                            <!-- Chọn ngày chiếu -->
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Chọn Ngày Chiếu</strong></label>
+                                <div id="date-buttons" class="d-flex flex-wrap gap-2">
+                                    <% if (movieDates.length> 0) { %>
+                                        <% movieDates.forEach(date=> { %>
+                                            <button class="btn btn-outline-primary date-btn"
+                                                data-date-id="<%= date.id %>" data-date="<%= date.date_show %>">
+                                                <%= new Date(date.date_show).toLocaleDateString('vi-VN') %>
+                                            </button>
+                                            <% }); %>
+                                                <% } else { %>
+                                                    <p class="text-danger">Không có ngày chiếu nào.</p>
+                                                    <% } %>
+                                </div>
+                            </div>
+
+                            <!-- Hiển thị giờ chiếu -->
+                            <div class="mb-3" id="showtimes-container">
+                                <label class="form-label"><strong>Chọn Giờ Chiếu</strong></label>
+                                <div id="showtime-buttons" class="d-flex flex-wrap gap-2"></div>
+                            </div>
+                        </div>
+        </div>
+    </div>
+
+    <% if (new Date(movie.release_date) <=new Date()) { %>
+        <% if (user) { %>
+            <div class="mt-4">
+                <h3 class="text-center">Thêm Đánh Giá</h3>
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form action="/submit-review" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Họ và tên</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>"
+                                    readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="review" class="form-label">Đánh giá</label>
+                                <textarea class="form-control" id="review" name="review" rows="4" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Số sao</label>
+                                <select class="form-select" id="rating" name="rating" required>
+                                    <option value="5">★★★★★ - 5 Sao</option>
+                                    <option value="4">★★★★☆ - 4 Sao</option>
+                                    <option value="3">★★★☆☆ - 3 Sao</option>
+                                    <option value="2">★★☆☆☆ - 2 Sao</option>
+                                    <option value="1">★☆☆☆☆ - 1 Sao</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Gửi Đánh Giá</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
+                <div class="alert alert-warning text-center mt-4" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill"></i> <!-- Bootstrap Icon -->
+                    Bạn cần <a href="/login" class="fw-bold text-decoration-none">đăng nhập</a> để viết đánh giá.
+                </div>
+                <% } %>
+
+
+                    <!-- Hiển thị đánh giá của khách hàng -->
+                    <div class="mt-5">
+                        <h2 class="text-center">Đánh Giá của Khách Hàng</h2>
+
+                        <!-- Đánh giá 1 -->
+                        <div class="card my-3 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Nguyễn Văn B</h5>
+                                    <span class="text-warning fs-5">★★★★☆</span>
+                                </div>
+                                <p class="card-text text-muted mt-2">Phim rất hay, nội dung hấp dẫn và diễn xuất tuyệt
+                                    vời!</p>
+                            </div>
+                        </div>
+
+                        <!-- Đánh giá 2 -->
+                        <div class="card my-3 border-0 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="card-title mb-0">Trần Thị C</h5>
+                                    <span class="text-warning fs-5">★★★★★</span>
+                                </div>
+                                <p class="card-text text-muted mt-2">Các cảnh hành động rất đã mắt. Rất đáng xem!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+</main>
+
+<script>
+
+    function toggleBookingForm() {
+        var form = document.getElementById("bookingForm");
+        if (form.style.display === "none") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+    const dateButtons = document.querySelectorAll(".date-btn");
+    const showtimesContainer = document.getElementById("showtimes-container");
+    const showtimeButtons = document.getElementById("showtime-buttons");
+
+    // Lấy dữ liệu giờ chiếu từ EJS
+    const movieTimes = JSON.parse('<%- JSON.stringify(movieTimes) %>');
+
+    dateButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const dateId = this.getAttribute("data-date-id");
+
+            // Xóa các button giờ chiếu cũ
+            showtimeButtons.innerHTML = "";
+
+            // Lọc giờ chiếu của ngày được chọn
+            const showTimesForDate = movieTimes.filter(time => time.movie_date_id == dateId);
+
+            if (showTimesForDate.length > 0) {
+                showTimesForDate.forEach(time => {
+                    const timeBtn = document.createElement("a");
+                    timeBtn.className = "btn btn-outline-success";
+                    timeBtn.textContent = time.show_time;
+                    timeBtn.href = `/movie/buy-tickets/${time.id}`; // Link đặt vé
+
+                    showtimeButtons.appendChild(timeBtn);
+                });
+
+                showtimesContainer.style.display = "block";
+            } else {
+                // Giữ nguyên phần tử `showtime-buttons` để không bị mất
+                showtimeButtons.innerHTML = `<p class="text-danger fw-bold">Không có giờ chiếu nào!</p>`;
+                showtimesContainer.style.display = "block";
+            }
+        });
+    });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

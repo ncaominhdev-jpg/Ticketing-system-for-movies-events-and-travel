@@ -1,0 +1,126 @@
+/* Phần đánh giá khách hàng */
+.review-section {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin: 2rem 0;
+}
+
+.review-section h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.review-card {
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+  margin-bottom: 1.5rem;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(52, 152, 219, 0.2);
+}
+
+.review-card .card-title {
+  color: #34495e;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.review-card .card-text {
+  color: #7f8c8d;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.rating-stars {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: #f1c40f;
+  margin-top: 1rem;
+}
+
+/* Form đánh giá */
+.review-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.review-form h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  border: 2px solid #bdc3c7;
+  border-radius: 6px;
+  padding: 0.75rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg...");
+  background-size: 16px 12px;
+  border: 2px solid #bdc3c7;
+}
+
+.btn-success {
+  background-color: #27ae60;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #219a52;
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .review-section {
+    padding: 1.5rem;
+  }
+
+  .review-form {
+    padding: 1.5rem;
+  }
+
+  .review-section h2 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .rating-stars {
+    font-size: 1.2rem;
+  }
+
+  .btn-success {
+    width: 100%;
+  }
+}

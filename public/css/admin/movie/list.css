@@ -1,0 +1,201 @@
+/* Root Variables */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --light-gray: #ecf0f1;
+    --dark-gray: #95a5a6;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #f39c12;
+    --border-radius: 8px;
+}
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Title */
+h1 {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Action Buttons */
+.d-flex .btn {
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #217dbb;
+    transform: translateY(-2px);
+}
+
+/* Search Input */
+.form-control {
+    border: 1px solid var(--dark-gray);
+    border-radius: var(--border-radius);
+    padding: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Table Styles */
+.table {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table th {
+    background: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    text-transform: uppercase;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px;
+    font-size: 15px;
+}
+
+/* Links */
+.table a {
+    font-weight: 600;
+    color: var(--accent-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.table a:hover {
+    text-decoration: underline;
+    color: #1c6ba0;
+}
+
+/* Badge Styles */
+.badge {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.badge.bg-success {
+    background: var(--success-color);
+}
+
+.badge.bg-secondary {
+    background: var(--primary-color);
+}
+
+/* Button Styles */
+.btn-sm {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-warning {
+    background: var(--warning-color);
+    border: none;
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #d68910;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    border: none;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination .page-link {
+    color: var(--primary-color);
+    border: 1px solid var(--dark-gray);
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+.pagination .page-link:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Hover Effects */
+.table tbody tr {
+    transition: all 0.3s ease-in-out;
+}
+
+.table tbody tr:hover {
+    background: rgba(52, 152, 219, 0.1);
+    transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-control {
+        width: 100% !important;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

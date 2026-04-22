@@ -1,0 +1,124 @@
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h2 class="mb-0">Thêm Tour Du Lịch</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/admin/tour/add" method="POST" enctype="multipart/form-data">
+                        <!-- Điểm Khởi Hành -->
+                        <div class="mb-3">
+                            <label for="departure-point" class="form-label fw-semibold">Điểm Khởi Hành</label>
+                            <input type="text" id="departure-point" name="departure_point" class="form-control"
+                                placeholder="Nhập điểm khởi hành" value="<%= formData.departure_point || '' %>">
+                            <% if (errors && errors.departure_point) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.departure_point %>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Điểm Đến -->
+                        <div class="mb-3">
+                            <label for="destination" class="form-label fw-semibold">Điểm Đến</label>
+                            <input type="text" id="destination" name="destination" class="form-control"
+                                placeholder="Nhập điểm đến" value="<%= formData.destination || '' %>">
+                            <% if (errors && errors.destination) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.destination %>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Ngày Khởi Hành -->
+                        <div class="mb-3">
+                            <label for="departure-date" class="form-label fw-semibold">Ngày Khởi Hành</label>
+                            <input type="date" id="departure-date" name="departure_date" class="form-control"
+                                value="<%= formData.departure_date || '' %>">
+                            <% if (errors && errors.departure_date) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.departure_date %>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Ngày Kết Thúc -->
+                        <div class="mb-3">
+                            <label for="end-date" class="form-label fw-semibold">Ngày Kết Thúc</label>
+                            <input type="date" id="end-date" name="end_date" class="form-control"
+                                value="<%= formData.end_date || '' %>">
+                            <% if (errors && errors.end_date) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.end_date %>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Địa Điểm -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label fw-semibold">Địa Điểm</label>
+                            <input type="text" id="location" name="location" class="form-control"
+                                placeholder="Nhập địa điểm" value="<%= formData.location || '' %>">
+                            <% if (errors && errors.location) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.location %>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Giá Tour -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label fw-semibold">Giá Tour</label>
+                            <input type="number" id="price" name="price" class="form-control"
+                                placeholder="Nhập giá tour" value="<%= formData.price || '' %>">
+                            <% if (errors && errors.price) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.price %>
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <!-- Ảnh Tour -->
+                        <div class="mb-3">
+                            <label for="image_url" class="form-label fw-semibold">Ảnh Tour</label>
+                            <input type="file" id="image_url" name="image_url" class="form-control">
+                            <% if (errors && errors.image_url) { %>
+                                <div class="text-danger mt-1">
+                                    <%= errors.image_url %>
+                                </div>
+                            <% } %>
+                            <!-- Xem trước ảnh -->
+                            <div class="text-center mt-2">
+                                <img id="preview-image" src="#" alt="Xem trước hình ảnh"
+                                    class="img-thumbnail d-none" width="500">
+                            </div>
+                        </div>
+
+                        <!-- Nút Gửi -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg fw-semibold">Thêm Tour</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script>
+    document.getElementById("image_url").addEventListener("change", function(event) {
+        const file = event.target.files[0]; // Lấy file đầu tiên
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewImage = document.getElementById("preview-image");
+                previewImage.src = e.target.result;
+                previewImage.classList.remove("d-none"); // Hiển thị ảnh xem trước
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    </script>
+    

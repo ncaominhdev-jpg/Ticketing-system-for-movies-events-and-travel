@@ -1,0 +1,187 @@
+/* Base styles */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container.mt-5 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Stage styling */
+.stage {
+  background: linear-gradient(to bottom, #2c3e50, #34495e);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Seat container */
+.seat-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+/* Seat design */
+.seat {
+  width: 50px;
+  height: 50px;
+  border: 2px solid;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* Seat states */
+.available {
+  background-color: #fff;
+}
+
+.sold {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Seat types */
+.vip {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.normal {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.far {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+/* Hover effects */
+.available:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Selected seat effect */
+.selected {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  border-color: #388E3C !important;
+}
+
+/* Price display */
+.price-container {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.price-container p {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+#total-price {
+  color: #dc3545;
+  font-size: 1.5rem;
+}
+
+/* Buy button styling */
+.btn-buy {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-buy:hover {
+  background: #bb2d3b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-buy:active {
+  transform: translateY(0);
+}
+
+.seat.reserved {
+  background-color: #565656; /* Màu đỏ */
+  cursor: not-allowed;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .seat {
+    width: 40px;
+    height: 40px;
+    font-size: 0.8rem;
+  }
+
+  .stage {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+
+  .price-container p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container.mt-5 {
+    padding: 1rem;
+  }
+  
+  .seat {
+    width: 35px;
+    height: 35px;
+    font-size: 0.7rem;
+  }
+  
+  .btn-buy {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}

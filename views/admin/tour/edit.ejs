@@ -1,0 +1,117 @@
+
+<main class="container my-5">
+    <div class="card shadow-lg p-4">
+        <h1 class="text-center text-primary fw-bold mb-4">
+            Cập Nhật Tour Du Lịch
+        </h1>
+        <h3 class="text-center text-secondary">
+            <%= tour.departure_point %> → <%= tour.destination %>
+        </h3>
+
+        <!-- Form Cập Nhật Tour -->
+        <form action="/admin/tour/edit/<%= tour.id %>" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <!-- Điểm Khởi Hành -->
+                <div class="col-md-6 mb-3">
+                    <label for="departure-point" class="form-label fw-semibold">Điểm Khởi Hành</label>
+                    <input type="text" id="departure-point" name="departure_point" class="form-control"
+                        placeholder="Nhập điểm khởi hành" value="<%= tour.departure_point %>">
+                    <% if (errors && errors.departure_point) { %>
+                        <div class="text-danger mt-1"><%= errors.departure_point %></div>
+                    <% } %>
+                </div>
+
+                <!-- Điểm Đến -->
+                <div class="col-md-6 mb-3">
+                    <label for="destination" class="form-label fw-semibold">Điểm Đến</label>
+                    <input type="text" id="destination" name="destination" class="form-control"
+                        placeholder="Nhập điểm đến" value="<%= tour.destination %>">
+                    <% if (errors && errors.destination) { %>
+                        <div class="text-danger mt-1"><%= errors.destination %></div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Ngày Khởi Hành -->
+                <div class="col-md-6 mb-3">
+                    <label for="departure-date" class="form-label fw-semibold">Ngày Khởi Hành</label>
+                    <input type="date" id="departure-date" name="departure_date" class="form-control"
+                        value="<%= tour.departure_date %>">
+                    <% if (errors && errors.departure_date) { %>
+                        <div class="text-danger mt-1"><%= errors.departure_date %></div>
+                    <% } %>
+                </div>
+
+                <!-- Ngày Kết Thúc -->
+                <div class="col-md-6 mb-3">
+                    <label for="end-date" class="form-label fw-semibold">Ngày Kết Thúc</label>
+                    <input type="date" id="end-date" name="end_date" class="form-control"
+                        value="<%= tour.end_date %>">
+                    <% if (errors && errors.end_date) { %>
+                        <div class="text-danger mt-1"><%= errors.end_date %></div>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Địa Điểm -->
+                <div class="col-md-6 mb-3">
+                    <label for="location" class="form-label fw-semibold">Địa Điểm</label>
+                    <input type="text" id="location" name="location" class="form-control"
+                        placeholder="Nhập địa điểm" value="<%= tour.location %>">
+                    <% if (errors && errors.location) { %>
+                        <div class="text-danger mt-1"><%= errors.location %></div>
+                    <% } %>
+                </div>
+
+                <!-- Giá Tour -->
+                <div class="col-md-6 mb-3">
+                    <label for="price" class="form-label fw-semibold">Giá Tour</label>
+                    <input type="number" id="price" name="price" class="form-control"
+                        placeholder="Nhập giá tour" value="<%= tour.price %>">
+                    <% if (errors && errors.price) { %>
+                        <div class="text-danger mt-1"><%= errors.price %></div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Ảnh Tour -->
+            <div class="mb-3">
+                <label for="image_url" class="form-label fw-semibold">Ảnh Tour</label>
+                <input type="file" id="image_url" name="image_url" class="form-control">
+                <% if (errors && errors.image_url) { %>
+                    <div class="text-danger mt-1"><%= errors.image_url %></div>
+                <% } %>
+            </div>
+
+            <!-- Hiển thị ảnh hiện tại -->
+            <div class="text-center mt-3">
+                <img src="../../../img/<%= tour.image_url %>" alt="Hình ảnh tour"
+                    class="img-fluid w-25 rounded shadow">
+            </div>
+
+            <!-- Nút Điều Khiển -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/admin/tour/details/<%= tour.id %>" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Quay lại
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save"></i> Cập Nhật
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script src="https://cdn.tiny.cloud/1/kopg29qtp7buegn0gvha0kw5x0640kup25llnek9z19c4r4u/tinymce/6/tinymce.min.js"
+    referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#movie-description',
+        plugins: 'lists link image code textcolor',
+        toolbar: 'undo redo | bold italic underline | fontsize fontfamily fontcolor | alignleft aligncenter alignright | bullist numlist | link image | strikethrough code',
+        menubar: false,
+        branding: false
+    });
+</script>
